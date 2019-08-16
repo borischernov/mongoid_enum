@@ -19,6 +19,8 @@ module Mongoid
           # XXX Mongoid may try to mongoize multiple times so if key is a valid value
           # assume that it has already been converted to value.
           value = key
+        elseif key.is_a?(Array)
+          value = key.map { |k| mongoize(k) }
         else
           value = Enum::InvalidKey.new(key)
         end
